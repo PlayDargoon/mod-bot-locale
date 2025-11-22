@@ -19,6 +19,9 @@ ForceLocale.Enable = 0
 #
 #    ForceLocale.Locale
 #        Description: Set the locale to force for playerbots
+#        Important: Check your server's MAX_LOCALES value in logs!
+#                   If MAX_LOCALES = 8, valid values are 0-7
+#                   If MAX_LOCALES = 9, valid values are 0-8
 #        Values:      0  = enUS (English - United States)
 #                     1  = koKR (Korean)
 #                     2  = frFR (French)
@@ -26,9 +29,12 @@ ForceLocale.Enable = 0
 #                     4  = zhCN (Chinese - China)
 #                     5  = zhTW (Chinese - Taiwan)
 #                     6  = esES (Spanish - Spain)
-#                     7  = esMX (Spanish - Mexico)
-#                     8  = ruRU (Russian)
-#        Default:     8 (Russian)
+#                     7  = esMX (Spanish - Mexico) / ruRU (Russian)*
+#                     8  = ruRU (Russian)** - only if MAX_LOCALES = 9
+#        
+#        *  If MAX_LOCALES = 8, use locale 7 for Russian texts in your DB
+#        ** If MAX_LOCALES = 9, use locale 8 for Russian texts in your DB
+#        Default:     7 (esMX/ruRU - depends on your database setup)
 #
 
-ForceLocale.Locale = 8
+ForceLocale.Locale = 7

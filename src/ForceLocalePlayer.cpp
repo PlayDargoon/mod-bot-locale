@@ -36,13 +36,14 @@ public:
             return;
 
         // Get configured locale
-        uint32 forcedLocale = sConfigMgr->GetOption<uint32>("ForceLocale.Locale", LOCALE_ruRU);
+        uint32 forcedLocale = sConfigMgr->GetOption<uint32>("ForceLocale.Locale", 7);
 
-        // Validate locale
+        // Validate locale - ensure it's within bounds
         if (forcedLocale >= MAX_LOCALES)
         {
-            LOG_ERROR("module", "ForceLocale: Invalid locale {} configured. Using default (ruRU = 8)", forcedLocale);
-            forcedLocale = LOCALE_ruRU;
+            LOG_ERROR("module", "ForceLocale: Invalid locale {} configured (MAX_LOCALES={}). Using locale 7 instead.", 
+                     forcedLocale, MAX_LOCALES);
+            forcedLocale = 7; // Use highest available locale
         }
 
         // Reset all locale priorities and set only the forced one
@@ -57,8 +58,8 @@ public:
         // Get locale name for logging
         const char* localeName = GetLocaleName(forcedLocale);
         
-        LOG_INFO("module", "ForceLocale: Set playerbots locale to {} ({}) for player {}", 
-                 localeName, forcedLocale, player->GetName());
+        LOG_INFO("module", "ForceLocale: Set playerbots locale to {} ({}) for player {} (MAX_LOCALES={})", 
+                 localeName, forcedLocale, player->GetName(), MAX_LOCALES);
     }
 
 private:
