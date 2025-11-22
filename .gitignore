@@ -1,0 +1,14 @@
+# Build files
+build/
+*.o
+*.a
+
+# Config files (only .dist should be in git)
+conf/*.conf
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
