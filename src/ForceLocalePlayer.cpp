@@ -35,15 +35,15 @@ public:
         if (!player)
             return;
 
-        // Get configured locale
+        // Get configured locale (default 7 = esMX, used for Russian in 8-locale setup)
         uint32 forcedLocale = sConfigMgr->GetOption<uint32>("ForceLocale.Locale", 7);
 
-        // Validate locale - ensure it's within bounds
+        // Validate locale
         if (forcedLocale >= MAX_LOCALES)
         {
-            LOG_ERROR("module", "ForceLocale: Invalid locale {} configured (MAX_LOCALES={}). Using locale 7 instead.", 
+            LOG_ERROR("module", "ForceLocale: Invalid locale {} configured (MAX_LOCALES={}). Using locale 7", 
                      forcedLocale, MAX_LOCALES);
-            forcedLocale = 7; // Use highest available locale
+            forcedLocale = 7;
         }
 
         // Reset all locale priorities and set only the forced one
@@ -58,8 +58,8 @@ public:
         // Get locale name for logging
         const char* localeName = GetLocaleName(forcedLocale);
         
-        LOG_INFO("module", "ForceLocale: Set playerbots locale to {} ({}) for player {} (MAX_LOCALES={})", 
-                 localeName, forcedLocale, player->GetName(), MAX_LOCALES);
+        LOG_INFO("module", "ForceLocale: Set playerbots locale to {} ({}) for player {}", 
+                 localeName, forcedLocale, player->GetName());
     }
 
 private:
